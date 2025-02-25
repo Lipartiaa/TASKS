@@ -1,0 +1,30 @@
+<?php
+/** @var \Devall\SignupWeather\Block\Adminhtml\WeatherAdmin $block */
+$weatherData = $block->getWeatherData();
+?>
+
+<h2>Signup Weather Admin Page</h2>
+<p>მოწესრიგეთ ამინდის მონაცემები აქ!</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>მომხმარებელი</th>
+        <th>LinkedIn პროფილი</th>
+        <th>ამინდის ინფორმაცია</th>
+        <th>თარიღი</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($weatherData as $data): ?>
+        <tr>
+            <td><?php echo $data->getCustomerName(); ?></td>
+            <td><?php echo $data->getLinkedinProfile(); ?></td>
+            <td><?php echo $data->getWeatherInfo(); ?></td>
+            <td><?php echo $data->getSignupDate(); ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+

@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .signup-title {
+            color: #ff6f00; /* Bright Orange */
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .signup-form {
+            display: inline-block;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #ff6f00; /* Orange border */
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 18px;
+            color: #ff6f00; /* Orange */
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ff6f00; /* Orange border */
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #ff4500; /* Darker Orange */
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+        }
+
+        .submit-button {
+            background-color: #ff6f00; /* Bright Orange */
+            color: #ffffff;
+            font-size: 18px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ff4500; /* Darker Orange */
+        }
+
+        @media (max-width: 600px) {
+            .signup-form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .signup-title {
+                font-size: 28px;
+            }
+
+            .input-label, .input-field, .submit-button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="signup-title">Sign Up</h1>
+<form action="<?= $block->getUrl('mysignup/index/post') ?>" method="POST" class="signup-form">
+    <input type="hidden" name="form_key" value="<?= $block->getFormKey(); ?>"/>
+
+    <div class="input-group">
+        <label for="name" class="input-label">Name:</label>
+        <input type="text" id="name" name="name" class="input-field" required/>
+    </div>
+
+    <div class="input-group">
+        <label for="date" class="input-label">Date:</label>
+        <input type="date" id="date" name="date" class="input-field" required/>
+    </div>
+
+    <div class="submit-group">
+        <button type="submit" class="submit-button">Submit</button>
+    </div>
+</form>
+
+</body>
+</html>
