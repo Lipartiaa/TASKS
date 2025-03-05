@@ -2,6 +2,8 @@
 /** @var $block \Devall\MySignup\Block\Adminhtml\Signup */
 $collection = $block->getSignupCollection();
 ?>
+<!--As is said us UI components! don't inject custom templates forbuilding a grid in admin -->
+
 <div class="admin__data-grid">
     <h2><?php echo __('Sign Ups') ?></h2>
     <?php if ($collection->getSize()): ?>
