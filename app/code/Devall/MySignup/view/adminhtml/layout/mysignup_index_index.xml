@@ -3,6 +3,7 @@
       layout="admin-2columns-left"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+         <!--As is said us UI components! don't inject custom templates forbuilding a grid in admin -->
         <referenceContainer name="content">
             <block class="Devall\MySignup\Block\Adminhtml\Signup" name="mysignup.list"
                    template="Devall_MySignup::signup.phtml"/>
