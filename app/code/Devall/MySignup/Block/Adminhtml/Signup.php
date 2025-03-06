@@ -1,5 +1,5 @@
 <?php
-
+// remove this block class! only use UI components for building grid!
 namespace Devall\MySignup\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;

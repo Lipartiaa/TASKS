@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+This is the kind of ui component tha tyou should have used for displaying grid in admin, instead of the custom template you have made.
+Please remove that template and add this component in layout file mysignup_index_index.xml, so that the layout renders this ui component instead of the template,
+also this component only has id column you need to add all of the other needed columns
+-->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">

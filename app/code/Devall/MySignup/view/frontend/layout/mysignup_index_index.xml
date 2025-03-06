@@ -3,6 +3,7 @@
       layout="1column"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+         <!-- why did you remove all of the base elements from the page (header, footer, sidebar)? was it stated in the task somewhere that sign up page is supposed to only render form and nothing else? if not than please don't remove those elements -->        
         <referenceBlock name="header" remove="true"/>
 
         <referenceBlock name="footer" remove="true"/>
