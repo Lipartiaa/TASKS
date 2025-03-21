@@ -4,6 +4,14 @@ $collection = $block->getSignupCollection();
 ?>
 <div class="admin__data-grid">
     <h2><?php echo __('Sign Ups') ?></h2>
+
+    <!-- Search & Filter -->
+    <div class="search-filters">
+        <input type="text" id="search-name" placeholder="Search by Name">
+        <input type="date" id="filter-date">
+        <button id="filter-btn"><?php echo __('Filter'); ?></button>
+    </div>
+
     <?php if ($collection->getSize()): ?>
         <table class="data-grid">
             <thead>
@@ -21,7 +29,6 @@ $collection = $block->getSignupCollection();
                     <td><?php echo $item->getData('name'); ?></td>
                     <td><?php echo $item->getData('date'); ?></td>
                     <td class="action-buttons">
-                        <!-- Delete ღილაკი -->
                         <a href="#" class="action delete" data-id="<?php echo $item->getData('signup_id'); ?>">
                             <?php echo __('Delete'); ?>
                         </a>
@@ -44,82 +51,53 @@ $collection = $block->getSignupCollection();
         border: 2px solid #ff7f00;
         width: 90%;
         max-width: 1100px;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: left;
     }
-
     .admin__data-grid h2 {
         font-size: 24px;
         color: #ff7f00;
-        text-align: left;
     }
-
+    .search-filters {
+        margin-bottom: 10px;
+    }
+    .search-filters input, .search-filters button {
+        padding: 8px;
+        margin-right: 10px;
+    }
     .data-grid {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
     }
-
     .data-grid th, .data-grid td {
         padding: 12px;
         text-align: left;
         border: 2px solid #ff7f00;
     }
-
     .data-grid th {
         background-color: #ff7f00;
         color: white;
-        font-weight: bold;
     }
-
     .data-grid tr:nth-child(even) {
         background-color: #fffaf0;
     }
-
     .data-grid tr:nth-child(odd) {
         background-color: #ffffff;
     }
-
     .data-grid tr:hover {
         background-color: #ffaf40;
         color: #fff;
     }
-
-    .data-grid td {
-        color: #555;
-        font-size: 16px;
-    }
-
-    .action-buttons {
-        display: flex;
-        justify-content: flex-start;
-        gap: 10px;
-    }
-
-    .action {
-        text-decoration: none;
-        font-weight: bold;
-        padding: 8px 12px;
-        border-radius: 5px;
-        transition: 0.3s ease;
-    }
-
     .action.delete {
         background-color: #dc3545;
         color: white;
-        border: 2px solid #c82333;
+        padding: 8px;
+        border-radius: 5px;
+        text-decoration: none;
         cursor: pointer;
     }
-
     .action.delete:hover {
         background-color: #c82333;
-    }
-
-    p {
-        font-size: 18px;
-        color: #ff7f00;
-        text-align: left;
     }
 </style>
 
@@ -128,20 +106,20 @@ $collection = $block->getSignupCollection();
         $(document).on('click', '.action.delete', function (e) {
             e.preventDefault();
             var signupId = $(this).data('id');
-            var row = $(this).closest('tr'); // მივიღებთ ამოღებულ რიგს
+            var row = $(this).closest('tr');
 
             confirm({
                 content: 'Are you sure you want to delete this signup?',
                 actions: {
                     confirm: function () {
                         $.ajax({
-                            url: url.build('mysignup/index/delete'),
+                            url: url.build('mysignup/signup/delete'),
                             type: 'POST',
-                            data: { id: signupId },
+                            data: { id: signupId, form_key: window.FORM_KEY },
                             showLoader: true,
                             success: function (response) {
                                 if (response.success) {
-                                    row.remove(); // წაშლის მხოლოდ ამ კონკრეტულ რიგს
+                                    row.remove();
                                 } else {
                                     alert('Error: ' + response.message);
                                 }
@@ -152,6 +130,27 @@ $collection = $block->getSignupCollection();
                         });
                     }
                 }
+            });
+        });
+
+        // Filter functionality
+        $('#filter-btn').click(function () {
+            var searchText = $('#search-name').val().toLowerCase();
+            var filterDate = $('#filter-date').val();
+
+            $('.data-grid tbody tr').each(function () {
+                var name = $(this).find('td:nth-child(2)').text().toLowerCase();
+                var date = $(this).find('td:nth-child(3)').text();
+                var showRow = true;
+
+                if (searchText && !name.includes(searchText)) {
+                    showRow = false;
+                }
+                if (filterDate && date !== filterDate) {
+                    showRow = false;
+                }
+
+                $(this).toggle(showRow);
             });
         });
     });

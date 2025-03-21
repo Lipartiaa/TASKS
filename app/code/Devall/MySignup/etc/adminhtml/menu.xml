@@ -7,7 +7,7 @@
              module="Devall_MySignup"
              sortOrder="10"
              parent="Magento_Customer::customer"
-             action="mysignup/index/index"
+             action="mysignup/signup/index"
              resource="Devall_MySignup::section"/>
     </menu>
 </config>
